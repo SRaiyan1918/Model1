@@ -14,7 +14,7 @@ def index():
     companies = sorted(df['Company'].unique())
     typenames = sorted(df['TypeName'].unique())
     rams = sorted(df['Ram'].unique())
-    opsyss = sorted(df['OpSys'].unique())
+    opsyss = sorted(df['OpSys'].dropna().astype(str).unique())
     displays = sorted(df['Display'].unique())
     hdds = sorted(df['HDD'].unique())
     ssds = sorted(df['SSD'].unique())
