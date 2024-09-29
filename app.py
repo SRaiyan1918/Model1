@@ -6,8 +6,8 @@ import sklearn
 
 app = Flask(__name__)
 
-df = pd.read_csv('/storage/emulated/0/Download/ML Model Deploy/static/datasets/cleaned laptop_data.csv')
-model = joblib.load('/storage/emulated/0/Download/ML Model Deploy/static/model/(SR) Laptop price prediction model(RandomForest).sralgo')
+df = pd.read_csv('static/datasets/data.csv')
+model = joblib.load('static/model/(SR) Laptop price prediction model(RandomForest).sralgo')
 
 @app.route('/')
 def index():
