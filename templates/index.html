@@ -1,1 +1,199 @@
-Simran
+<!DOCTYPE html>
+<html lang="en">
+<head xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8">
+    <title>Laptop Price Predictor</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    
+    <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}">
+
+</head>
+<body class="bg-img">
+
+<div class="container">
+    <div class="row">
+        <div class="card mt-50" style="width: 100%; height: 100%">
+            <div class="card-header" style="text-align: center">
+                <h1>Welcome to Laptop Price Predictor</h1>
+            </div>
+            <div class="card-body">
+                <div class="col-12" style="text-align: center">
+                    <h5>This app predicts the price of a laptop you want to sellbor buy. Try filling the details below: </h5>
+                </div>
+                <br>
+                <form method="post" accept-charset="utf-8" name="Modelform">
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the Company:</b></label><br>
+                        <select class="selectpicker form-control" id="company" name="company" required="1">
+                            {% for company in companies %}
+                            <option value="{{ company }}">{{ company }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the Typename:</b> </label><br>
+                        <select class="selectpicker form-control" id="typename" name="typename" required="1">
+                            {% for typename in typenames %}
+                            <option value="{{typename}}">{{typename}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select Ram:</b> </label><br>
+                        <select class="selectpicker form-control" id="ram" name="ram" required="1">
+                            {% for ram in rams %}
+                            <option value="{{ ram }}">{{ ram }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the OpSys:</b> </label><br>
+                        <select class="selectpicker form-control" id="opsys" name="opsys" required="1">
+                            {% for opsys in opsyss %}
+                            <option value="{{ opsys }}">{{ opsys }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the Display:</b> </label><br>
+                        <select class="selectpicker form-control" id="display" name="display" required="1">
+                            {% for display in displays %}
+                            <option value="{{ display }}">{{ display }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the HDD:</b> </label><br>
+                        <select class="selectpicker form-control" id="hdd" name="hdd" required="1">
+                            {% for hdd in hdds %}
+                            <option value="{{ hdd }}">{{ hdd }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the SSD:</b> </label><br>
+                        <select class="selectpicker form-control" id="ssd" name="ssd" required="1">
+                            {% for ssd in ssds %}
+                            <option value="{{ ssd }}">{{ ssd }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the Hybrid:</b> </label><br>
+                        <select class="selectpicker form-control" id="hybrid" name="hybrid" required="1">
+                            {% for hybrid in hybrids %}
+                            <option value="{{ hybrid }}">{{ hybrid }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the Flash Storage:</b> </label><br>
+                        <select class="selectpicker form-control" id="flash_storage" name="flash_storage" required="1">
+                            {% for flash_storage in flash_storages %}
+                            <option value="{{ flash_storage }}">{{ flash_storage }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the GPU Brands:</b> </label><br>
+                        <select class="selectpicker form-control" id="gpu_brands" name="gpu_brands" required="1">
+                            {% for gpu_brands in gpu_brandss %}
+                            <option value="{{ gpu_brands }}">{{ gpu_brands }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select the CPU Names:</b> </label><br>
+                        <select class="selectpicker form-control" id="cpu_name" name="cpu_name" required="1">
+                            {% for cpu_name in cpu_names %}
+                            <option value="{{ cpu_name }}">{{ cpu_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select Touchscreen:</b></label><br>
+                        <input type="radio" id="touchscreen_yes" name="touchscreen" value="1" required>
+                        <label for="touchscreen_yes">Yes</label>
+                        <input type="radio" id="touchscreen_no" name="touchscreen" value="0">
+                        <label for="touchscreen_no">No</label>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Select IPS:</b></label><br>
+                        <input type="radio" id="ips_yes" name="ips" value="1" required>
+                        <label for="ips_yes">Yes</label>
+                        <input type="radio" id="ips_no" name="ips" value="no">
+                        <label for="ips_no">No</label>
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Enter the Number of Computer's Weight:</b> </label><br>
+                        <input type="number" class="form-control" id="weight" name="weight"
+                               placeholder="Enter the Computer's Weight">
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <label><b>Enter the Number of Computer's PPI:</b> </label><br>
+                        <input type="number" class="form-control" id="ppi" name="ppi"
+                               placeholder="Enter the Computer's PPI">
+                    </div>
+                    <div class="col-md-10 form-group" style="text-align: center">
+                        <button  class="btn btn-primary form-control" onclick="send_data()">Predict Price</button>
+                    </div>
+                </form>
+                <br>
+                <div class="row">
+                    <div class="col-12" style="text-align: center">
+                        <h4><span id="prediction"></span></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function send_data(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        document.getElementById('prediction').innerHTML = "Wait! Predicting Price.....";
+
+        let fd = new FormData(document.querySelector('form'));
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/predict', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                document.getElementById('prediction').innerHTML = "Prediction: ₹" + xhr.responseText;
+            } else if (xhr.readyState === XMLHttpRequest.DONE) {
+                document.getElementById('prediction').innerHTML = "Error: Could not fetch prediction!";
+            }
+        };
+        
+        xhr.send(fd);
+    }
+
+    document.querySelector('form').addEventListener("submit", send_data); // Bind the submit event to your form
+</script>
+>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+                          </html>
