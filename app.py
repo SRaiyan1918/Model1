@@ -7,7 +7,7 @@ import sklearn
 
 app = Flask(__name__)
 cors=CORS(app)
-df = pd.read_csv('static/datasets/cleaned laptop_data.csv')
+df = pd.read_csv('static/cleaned laptop_data.csv')
 model = joblib.load('static/model/(SR) Laptop price prediction model(RandomForest).sralgo')
 
 @app.route('/',methods=['GET','POST'])
