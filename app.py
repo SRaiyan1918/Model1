@@ -6,7 +6,7 @@ import sklearn
 
 app = Flask(__name__)
 
-df = pd.read_csv('static/datasets/data.csv')
+df = pd.read_csv('static/datasets/cleaned laptop_data.csv')
 model = joblib.load('static/model/(SR) Laptop price prediction model(RandomForest).sralgo')
 
 @app.route('/')
@@ -14,7 +14,7 @@ def index():
     companies = sorted(df['Company'].unique())
     typenames = sorted(df['TypeName'].unique())
     rams = sorted(df['Ram'].unique())
-    opsyss = sorted(df['OpSys'].dropna().astype(str).unique())
+    opsyss = sorted(df['OpSys'].unique())
     displays = sorted(df['Display'].unique())
     hdds = sorted(df['HDD'].unique())
     ssds = sorted(df['SSD'].unique())
