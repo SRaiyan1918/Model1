@@ -1,0 +1,26 @@
+/* Resetting margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background image styling */
+.bg-img {
+    background-image: url('{{url_for('static', filename='images/bg.jpg')}}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Adjust the height to cover the full viewport */
+    width: 100%; /* Ensures the background image covers the width */
+}
+
+/* Margin top spacing */
+.mt-50 {
+    margin-top: 50px;
+}
+
+/* Canvas styling */
+#canvas {
+    border: 2px solid black;
+}
