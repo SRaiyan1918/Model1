@@ -1,15 +1,16 @@
 from flask import Flask,render_template,request,redirect
+from flask_cors import CORS,cross_origin
 import joblib
 import pandas as pd
 import numpy as np
 import sklearn
 
 app = Flask(__name__)
+cors=CORS(app)
+df = pd.read_csv('/storage/emulated/0/Download/ML Model Deploy/static/datasets/cleaned laptop_data.csv')
+model = joblib.load('/storage/emulated/0/Download/ML Model Deploy/static/model/(SR) Laptop price prediction model(RandomForest).sralgo')
 
-df = pd.read_csv('static/datasets/cleaned laptop_data.csv')
-model = joblib.load('static/model/(SR) Laptop price prediction model(RandomForest).sralgo')
-
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def index():
     companies = sorted(df['Company'].unique())
     typenames = sorted(df['TypeName'].unique())
@@ -36,6 +37,7 @@ def index():
                             cpu_names=cpu_names)
 
 @app.route('/predict',methods=['POST'])
+@cross_origin()
 def predict():
     company = request.form.get('company')
     typename = request.form.get('typename')
