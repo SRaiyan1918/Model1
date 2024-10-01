@@ -7,7 +7,7 @@
 
 /* Background image styling */
 .bg-img {
-    background-image: url('{{url_for('static', filename='images/bg.jpg')}}');
+    background-image: url('static/20240914_082408.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
