@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Laptop Price Predictor</title>
-    <link rel="stylesheet" href="static/style.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,12 +16,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-
+<style>
+    body{
+    background-image: url('static/20240914_082408.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Adjust the height to cover the full viewport */
+    width: 100%; /* Ensures the background image covers the width */
+}
+    .container{
+        opacity:0.9;
+    }
+</style>
 </head>
-<body class="bg-img">
+<body>
 
-<div class="bg-img container">
-    <div class="bg-img row">
+<div class="container">
+    <div class="row">
         <div class="card mt-50" style="width: 100%; height: 100%">
             <div class="card-header" style="text-align: center">
                 <h1>Welcome to Laptop Price Predictor</h1>
